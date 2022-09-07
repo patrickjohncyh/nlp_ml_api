@@ -6,7 +6,7 @@ several abstractions to work with namely `NLPModel` and `NLPDataset`, that would
 allow for training and evaluation of many models across various datasets.
 
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/patrickjohncyh/nlp_ml_api/blob/main/api_tutorial.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/patrickjohncyh/nlp_ml_api/blob/master/api_tutorial.ipynb)
 
 ## Installation
 
