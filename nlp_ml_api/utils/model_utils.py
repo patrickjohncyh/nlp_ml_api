@@ -41,6 +41,10 @@ def deploy_model(model: NLPModel, mode='localhost'):
     p = subprocess.call(['make','-C', 'endpoint', 'prod'])
     if mode == 'localhost':
         try:
-            p = subprocess.call(['make', '-C', 'endpoint', 'up-prod'])
+            p = subprocess.check_output(['make', '-C', 'endpoint', 'up-prod'])
+            print(p)
         except KeyboardInterrupt:
+            p = subprocess.call(['make', '-C', 'endpoint', 'down-prod'])
+        except Exception as e:
+            print(e)
             p = subprocess.call(['make', '-C', 'endpoint', 'down-prod'])

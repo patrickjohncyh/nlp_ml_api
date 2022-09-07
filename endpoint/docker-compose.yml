@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  prod:
+    image: endpoint/endpoint:latest-prod
+    working_dir: /production/endpoint
+    build: 
+      target: production
+      context: .
+      dockerfile: Dockerfile
