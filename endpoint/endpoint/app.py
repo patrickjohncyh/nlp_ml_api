@@ -4,7 +4,7 @@ from nlp_ml_api.utils.model_utils import load_model
 
 app = FastAPI()
 settings = Settings()
-model = load_model('saved_models/model_deploy.pickle')
+model = load_model('model_deploy.pickle')
 
 @app.get("/")
 async def root():
