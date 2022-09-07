@@ -7,6 +7,10 @@ from setuptools import setup, find_packages
 with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
+with open('endpoint/requirements.txt') as f:
+    requirements += f.read().splitlines()
+
+
 setup_requirements = ['pytest-runner', ]
 
 test_requirements = ['pytest>=3', ]
