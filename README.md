@@ -110,6 +110,11 @@ dataset out of the box.
 to `train` and `evaluate` the model on given dataset. It also provides utility to save
 and load a model after training.
  
+### Deployment
+Model is deployed by wrapping it with a FastAPI app and dockerizing it. We are able to call the model locally by building
+the docker image on the local machine and can also serve the docker image as a Heroku app. The main steps of
+serving on Heroku can be found [here](https://devcenter.heroku.com/articles/build-docker-images-heroku-yml). We use a
+`Makefile` to compose commands for ease of use. 
 
 ## Improvements / To Do
 
