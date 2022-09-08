@@ -73,6 +73,12 @@ via `deploy_model` function. Under the hood, python issues commands via a `Makef
 deploy_model(model, mode='heroku', endpoint_name='tweet_sentiment_nlp_endpoint')
 ```
 
+To kill the endpoint, issue in command-line from project root, 
+
+```
+HEROKU_APP_NAME=<ENDPOINT-NAME> make -C endpoint delete_app
+```
+
 
 ## Implementation Details
 
