@@ -8,7 +8,7 @@ model = load_model('model_deploy.pickle')
 
 @app.get("/")
 async def root():
-    return {"message": f"Hello World, {settings.mode}"}
+    return {"message": f"Hello, call the model at /endpoint/?query=<QUERY>"}
 
 
 @app.get("/endpoint/")
