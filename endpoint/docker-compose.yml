@@ -5,6 +5,6 @@ services:
     image: endpoint/endpoint:latest-prod
     working_dir: /production/endpoint
     build: 
-      target: production
+      target: base
       context: .
       dockerfile: Dockerfile

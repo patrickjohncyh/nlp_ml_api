@@ -8,9 +8,6 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 
 RUN pip install git+https://github.com/patrickjohncyh/nlp_ml_api
 
-# production image.
-FROM base as production
-
 WORKDIR /production
 
 COPY . .

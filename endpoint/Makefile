@@ -25,14 +25,15 @@ delete_app:
 	git remote rm heroku
 
 deploy:
+	git checkout master
 	@if [ "`git branch --list ${HEROKU_APP_NAME}-endpoint`" ]; then \
 		git branch -D ${HEROKU_APP_NAME}-endpoint; \
 	fi
-	git checkout -b ${HEROKU_APP_NAME}-endpointt
+	git checkout -b ${HEROKU_APP_NAME}-endpoint
 	git add model_deploy.pickle
 	git commit -m "model deployment to heroku"
-	cd ..
-	git push heroku `git subtree split --prefix endpoint ${HEROKU_APP_NAME}-endpoint`:master --force
-	git checkout master
-	git branch -D ${HEROKU_APP_NAME}-endpointt
+	cd ..; git push heroku `git subtree split --prefix endpoint ${HEROKU_APP_NAME}-endpoint`:master --force
 
+
+	git checkout master
+	git branch -D ${HEROKU_APP_NAME}-endpoint
