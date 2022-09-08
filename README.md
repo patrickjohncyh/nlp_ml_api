@@ -41,9 +41,38 @@ modeler.train()
 modeler.evaluate(split='test')
 # get model from Modeler
 model = modeler.model
-# invoke Model
+# invoke Model locally
 model.predict('Quarantine Day 5: I forgot how the outside world looks like anymore')
 ```
+
+## Deployment
+
+You can invoke the model either in python (e.g. notebook) or locally (localhost) or deploy the model
+as a [Heroku](https://www.heroku.com) app and make a HTTP request at the endpoint.
+
+### 1. Python Invocation
+```python
+model.predict('I like cats')
+```
+
+### 2. Localhost
+
+We build a docker container, containing a FastAPI app which loads the model and handles requests.
+
+```python
+deploy_model(model, mode='localhost')
+```
+
+### 3. Live Endpoint / Heroku
+
+Deployment to Heroku is more involved and assumes that you have [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+installed, and have logged in (i.e. `heroku login`). Once that is done, you can deploy the model
+via `deploy_model` function. Under the hood, python issues commands via a `Makefile`.
+
+```python
+deploy_model(model, mode='heroku', endpoint_name='tweet_sentiment_nlp_endpoint')
+```
+
 
 ## Implementation Details
 
@@ -81,10 +110,12 @@ and load a model after training.
 - __Metaflow/Ray__: While local machines may not have GPUs locally, [Metaflow](https://metaflow.org/) /
   [Anyscale(Ray)](https://www.anyscale.com/) can provide preemptable GPU resources specifically
   for the training step for large models (e.g. Transformers).
+- __Deployment__: Deployment currently relies on model being `git push-able`, which is impractical for
+  models which large memory footprint.
 - __Enable custom metrics for evaluation__: Evaluation is hard-coded, but could potentially allow
-  uers to pass in their own evaluation functions.
+  uers to pass in their own evaluation functions if required.
 - Improve abstractions to suit NLP use-case: There are often standard steps in NLP (e.g. pre-processing) which
-  can be made part of the `NLPModel` abstraction.
+  can be made more explicit as part of the `NLPModel` abstraction.
 - Improve debugging / reporting
 
 
