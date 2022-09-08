@@ -9,6 +9,7 @@ up-prod:
 	docker run --name endpoint -p 80:80 endpoint/endpoint:latest-prod
 
 down-prod:
+    docker kill endpoint
 	docker rm endpoint
 
 bash:
