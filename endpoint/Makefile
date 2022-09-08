@@ -32,7 +32,7 @@ deploy:
 	git checkout -b ${HEROKU_APP_NAME}-endpoint
 	git add model_deploy.pickle
 	git commit -m "model deployment to heroku"
-	cd ..; git push heroku `git subtree split --prefix endpoint ${HEROKU_APP_NAME}-endpoint`:master --force
+	cd ..; git push heroku `git subtree split --prefix endpoint`:refs/heads/master --force
 
 
 	git checkout master
