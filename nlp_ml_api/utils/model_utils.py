@@ -53,12 +53,14 @@ def deploy_model(model: NLPModel, mode:str = 'localhost', endpoint_name:str = No
 
     elif mode == 'heroku':
         assert endpoint_name
+        endpoint_name = endpoint_name.lower()
         local_env = os.environ.copy()
         local_env['HEROKU_APP_NAME'] = endpoint_name
         # create the heroku app
         p = subprocess.call(['make', '-C', 'endpoint', 'create_app'], env=local_env)
         # deploy app
         p = subprocess.call(['make', '-C', 'endpoint', 'deploy'], env=local_env)
+        print('Test endpoint at: https://{}.herokuapp.com/endpoint/?query="i like cats"'.format(endpoint_name))
 
     else:
         raise NotImplementedError
