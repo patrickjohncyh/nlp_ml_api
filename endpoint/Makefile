@@ -15,3 +15,9 @@ down-prod:
 bash:
 	docker-compose run --entrypoint=bash prod
 
+deploy:
+	git checkout -b endpoint
+	git add model_deploy.pickle
+	git commit -m "add model for deployment"
+	git push heroku `git subtree split --prefix endpoint endpoint`:master --force
+	git branch -D endpoint
