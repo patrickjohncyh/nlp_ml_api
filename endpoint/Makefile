@@ -1,4 +1,4 @@
-.PHONY: build dev test tests up-dev bash prod up-dev up-prod
+.PHONY: build bash prod up-prod
 
 build: prod
 
@@ -15,9 +15,24 @@ down-prod:
 bash:
 	docker-compose run --entrypoint=bash prod
 
+create_app:
+	heroku apps:create ${HEROKU_APP_NAME}
+	heroku git:remote -a ${HEROKU_APP_NAME}
+	heroku stack:set container
+
+delete_app:
+	heroku apps:destroy ${HEROKU_APP_NAME} --confirm ${HEROKU_APP_NAME}
+	git remote rm heroku
+
 deploy:
-	git checkout -b endpoint
+	@if [ "`git branch --list ${HEROKU_APP_NAME}-endpoint`" ]; then \
+		git branch -D ${HEROKU_APP_NAME}-endpoint; \
+	fi
+	git checkout -b ${HEROKU_APP_NAME}-endpointt
 	git add model_deploy.pickle
-	git commit -m "add model for deployment"
-	git push heroku `git subtree split --prefix endpoint endpoint`:master --force
-	git branch -D endpoint
+	git commit -m "model deployment to heroku"
+	cd ..
+	git push heroku `git subtree split --prefix endpoint ${HEROKU_APP_NAME}-endpoint`:master --force
+	git checkout master
+	git branch -D ${HEROKU_APP_NAME}-endpointt
+
