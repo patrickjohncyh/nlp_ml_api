@@ -112,5 +112,3 @@ ENV/
 
 # mac file
 .DS_Store
-
-*.pickle
